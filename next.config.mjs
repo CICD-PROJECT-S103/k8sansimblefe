@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const isProd = process.env.NODE_ENV === 'production'
+const enableGhPages =
+  process.env.ENABLE_GH_PAGES === 'true' ||
+  process.env.NEXT_PUBLIC_ENABLE_GH_PAGES === 'true'
 
 const nextConfig = {
   eslint: {
@@ -22,7 +25,7 @@ const nextConfig = {
     return config
   },
   // Only use basePath and assetPrefix for production builds (GitHub Pages)
-  ...(isProd && {
+  ...(isProd && enableGhPages && {
     basePath: '/Portfolio-builder',
     assetPrefix: '/Portfolio-builder',
   }),
